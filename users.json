@@ -1,0 +1,136 @@
+[
+  {
+    "username": "mmm@mmm.com",
+    "email": "mmm@mmm.com",
+    "password": "mmm@mmm.com",
+    "state": {}
+  },
+  {
+    "username": "qqq@qqq.com",
+    "email": "qqq@qqq.com",
+    "password": "qqq@qqq.com",
+    "state": {
+      "user": {
+        "username": "qqq@qqq.com",
+        "email": "qqq@qqq.com",
+        "password": "qqq@qqq.com"
+      }
+    }
+  },
+  {
+    "username": "rrr@rrr.com",
+    "email": "rrr@rrr.com",
+    "password": "rrr@rrr.com",
+    "state": {
+      "activeTradingBots": [
+        {
+          "id": 3,
+          "pair": "SOL/USDT",
+          "type": "Futures Grid",
+          "dailyGains": 1,
+          "drawdown": 0.12,
+          "volatility": 40,
+          "coinImage": "./bot/assets/sol.svg",
+          "graphSrc": "./bot/assets/graph3.png",
+          "status": "Active - 5D 2H 32m",
+          "investment": 55,
+          "pnl": 0
+        },
+        {
+          "id": 1,
+          "pair": "DOGE/USDT",
+          "type": "Futures Grid",
+          "dailyGains": 1,
+          "drawdown": 0.1,
+          "volatility": 10,
+          "coinImage": "./bot/assets/doge.svg",
+          "graphSrc": "./bot/assets/graph1.png",
+          "status": "Active - 5D 2H 32m",
+          "investment": 788,
+          "pnl": 0
+        }
+      ],
+      "user": {
+        "username": "rrr@rrr.com",
+        "email": "rrr@rrr.com",
+        "password": "rrr@rrr.com"
+      },
+      "completedTradingBots": [
+        {
+          "id": 1,
+          "pair": "DOGE/USDT",
+          "type": "Futures Grid",
+          "dailyGains": "3.17",
+          "drawdown": 0.1,
+          "volatility": 10,
+          "coinImage": "./bot/assets/doge.svg",
+          "graphSrc": "./bot/assets/graph1.png",
+          "status": "Active - 5D 2H 32m",
+          "investment": 669,
+          "pnl": 21.180000000000014
+        }
+      ],
+      "someProperty": "newValue"
+    }
+  },
+  {
+    "username": "ppp@ppp.com",
+    "email": "ppp@ppp.com",
+    "password": "ppp@ppp.com",
+    "state": {
+      "user": {
+        "username": "ppp@ppp.com",
+        "email": "ppp@ppp.com",
+        "password": "ppp@ppp.com"
+      },
+      "activeTradingBots": [],
+      "completedTradingBots": [
+        {
+          "id": 3,
+          "pair": "SOL/USDT",
+          "type": "Futures Grid",
+          "dailyGains": "2.42",
+          "drawdown": 0.12,
+          "volatility": 40,
+          "coinImage": "./bot/assets/sol.svg",
+          "graphSrc": "./bot/assets/graph3.png",
+          "status": "Active - 5D 2H 32m",
+          "investment": 200,
+          "pnl": 4.830000000000001
+        },
+        {
+          "id": 1,
+          "pair": "DOGE/USDT",
+          "type": "Futures Grid",
+          "dailyGains": "42.47",
+          "drawdown": 0.1,
+          "volatility": 10,
+          "coinImage": "./bot/assets/doge.svg",
+          "graphSrc": "./bot/assets/graph1.png",
+          "status": "Active - 5D 2H 32m",
+          "investment": 55,
+          "pnl": 23.360000000000003
+        },
+        {
+          "id": 2,
+          "pair": "XRP/USDT",
+          "type": "Futures Grid",
+          "dailyGains": 1,
+          "drawdown": 0.12,
+          "volatility": 30,
+          "coinImage": "./bot/assets/xrp.svg",
+          "graphSrc": "./bot/assets/graph2.png",
+          "status": "Active - 5D 2H 32m",
+          "investment": 55456,
+          "pnl": 0
+        }
+      ]
+    }
+  },
+  {
+    "username": "ttt@ttt.com",
+    "email": "ttt@ttt.com",
+    "password": "ttt@ttt.com",
+    "state": {}
+  }
+]
