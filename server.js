@@ -151,6 +151,30 @@ app.put('/users/:email/updateState', (req, res) => {
   res.status(200).json({ message: 'User state updated successfully!', state: newState });
 });
 
+// Route to add a new bot to activeTradingBots for a user by email
+app.post('/users/:email/addActiveBot', (req, res) => {
+  console.log(req.params);
+  const { email } = req.params;
+  const newBot = req.body; // The new bot object sent in the request body
+
+  const users = readUsersFromFile();
+  const userIndex = users.findIndex(user => user.email === email);
+
+  if (userIndex === -1) {
+    return res.status(404).json({ message: 'User not found!' });
+  }
+
+  // Ensure the activeTradingBots array exists, or initialize it if it doesn't
+  if (!users[userIndex].state.activeTradingBots) {
+    users[userIndex].state.activeTradingBots = [];
+  }
+
+  users[userIndex].state.activeTradingBots.push(newBot); // Add the new bot to the array
+  writeUsersToFile(users);
+
+  res.status(200).json({ message: 'Bot added to activeTradingBots successfully!', bot: newBot });
+});
+
 
 // Delete a user by email
 app.delete('/users/:email', (req, res) => {
