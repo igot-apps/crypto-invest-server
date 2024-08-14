@@ -31,7 +31,6 @@ const writeUsersToFile = (users) => {
 app.post('/register', (req, res) => {
     const { username, email, password, confirmPassword, state={} } = req.body;
    
-    
     // Validate username length
     if (username.length < 3) {
       return res.status(400).json({ message: 'Username must be at least 3 characters long!' });
@@ -92,9 +91,6 @@ app.post('/login', (req, res) => {
       return res.status(401).json({ message: 'Invalid email or password!' });
     }
 
-    
-  
-  
     // Send success response with the user object
     res.status(200).json({ message: 'Login successful!', user });
   });
@@ -122,7 +118,6 @@ app.get('/users/:email', (req, res) => {
 app.put('/users/:email', (req, res) => {
   const { email } = req.params;
   const { username, password, state } = req.body;
-  console.log(req.body);
 
   const users = readUsersFromFile();
   const userIndex = users.findIndex(user => user.email === email);
@@ -131,12 +126,31 @@ app.put('/users/:email', (req, res) => {
     return res.status(404).json({ message: 'User not found!' });
   }
 
-  const updatedUser = { ...users[userIndex],state };
+  const updatedUser = { ...users[userIndex], username, password, state };
   users[userIndex] = updatedUser;
   writeUsersToFile(users);
 
   res.status(200).json({ message: 'User updated successfully!', updatedUser });
 });
+
+// Update only the state of a user by email
+app.put('/users/:email/updateState', (req, res) => {
+  const { email } = req.params;
+  const newState = req.body; // Directly take the request body as the state object
+
+  const users = readUsersFromFile();
+  const userIndex = users.findIndex(user => user.email === email);
+
+  if (userIndex === -1) {
+    return res.status(404).json({ message: 'User not found!' });
+  }
+
+  users[userIndex].state = newState; // Replace the existing state with the new state
+  writeUsersToFile(users);
+
+  res.status(200).json({ message: 'User state updated successfully!', state: newState });
+});
+
 
 // Delete a user by email
 app.delete('/users/:email', (req, res) => {
@@ -153,6 +167,40 @@ app.delete('/users/:email', (req, res) => {
   writeUsersToFile(users);
 
   res.status(200).json({ message: 'User deleted successfully!' });
+});
+
+// Remove an active bot by ID and move it to completed bots
+app.put('/users/:email/moveBot/:botId', (req, res) => {
+  const { email, botId } = req.params;
+  const users = readUsersFromFile();
+  const userIndex = users.findIndex(user => user.email === email);
+
+  if (userIndex === -1) {
+    return res.status(404).json({ message: 'User not found!' });
+  }
+
+  const user = users[userIndex];
+  const activeBots = user.state.activeTradingBots || [];
+  const completedBots = user.state.completedTradingBots || [];
+
+  const botIndex = activeBots.findIndex(bot => bot.id == botId);
+  if (botIndex === -1) {
+    return res.status(404).json({ message: 'Active bot not found!' });
+  }
+
+  // Remove the bot from active and add it to completed
+  const [movedBot] = activeBots.splice(botIndex, 1);
+  completedBots.push(movedBot);
+
+  // Update user's state
+  user.state.activeTradingBots = activeBots;
+  user.state.completedTradingBots = completedBots;
+
+  // Save the updated users array
+  users[userIndex] = user;
+  writeUsersToFile(users);
+
+  res.status(200).json({ message: 'Bot moved to completed successfully!', movedBot });
 });
 
 // Start the server
